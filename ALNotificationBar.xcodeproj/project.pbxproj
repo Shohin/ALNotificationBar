@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D34EC40321F09FD300C8E134 /* ALInAppNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34EC40221F09FD300C8E134 /* ALInAppNotificationBar.swift */; };
 		D3C0DFBB21EF4DFC00BDC20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0DFBA21EF4DFC00BDC20C /* AppDelegate.swift */; };
 		D3C0DFBD21EF4DFC00BDC20C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0DFBC21EF4DFC00BDC20C /* ViewController.swift */; };
 		D3C0DFC021EF4DFC00BDC20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3C0DFBE21EF4DFC00BDC20C /* Main.storyboard */; };
 		D3C0DFC221EF4DFD00BDC20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3C0DFC121EF4DFD00BDC20C /* Assets.xcassets */; };
 		D3C0DFC521EF4DFD00BDC20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3C0DFC321EF4DFD00BDC20C /* LaunchScreen.storyboard */; };
+		D3C0DFCE21EF4E1E00BDC20C /* ALNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0DFCD21EF4E1E00BDC20C /* ALNotificationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D34EC40221F09FD300C8E134 /* ALInAppNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALInAppNotificationBar.swift; sourceTree = "<group>"; };
 		D3C0DFB721EF4DFC00BDC20C /* ALNotificationBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALNotificationBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C0DFBA21EF4DFC00BDC20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3C0DFBC21EF4DFC00BDC20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		D3C0DFC121EF4DFD00BDC20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3C0DFC421EF4DFD00BDC20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3C0DFC621EF4DFD00BDC20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3C0DFCD21EF4E1E00BDC20C /* ALNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALNotificationBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		D3C0DFB921EF4DFC00BDC20C /* ALNotificationBar */ = {
 			isa = PBXGroup;
 			children = (
+				D3C0DFCC21EF4E0600BDC20C /* bar */,
 				D3C0DFBA21EF4DFC00BDC20C /* AppDelegate.swift */,
 				D3C0DFBC21EF4DFC00BDC20C /* ViewController.swift */,
 				D3C0DFBE21EF4DFC00BDC20C /* Main.storyboard */,
@@ -62,6 +67,15 @@
 				D3C0DFC621EF4DFD00BDC20C /* Info.plist */,
 			);
 			path = ALNotificationBar;
+			sourceTree = "<group>";
+		};
+		D3C0DFCC21EF4E0600BDC20C /* bar */ = {
+			isa = PBXGroup;
+			children = (
+				D3C0DFCD21EF4E1E00BDC20C /* ALNotificationBar.swift */,
+				D34EC40221F09FD300C8E134 /* ALInAppNotificationBar.swift */,
+			);
+			path = bar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +149,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D34EC40321F09FD300C8E134 /* ALInAppNotificationBar.swift in Sources */,
 				D3C0DFBD21EF4DFC00BDC20C /* ViewController.swift in Sources */,
 				D3C0DFBB21EF4DFC00BDC20C /* AppDelegate.swift in Sources */,
+				D3C0DFCE21EF4E1E00BDC20C /* ALNotificationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -268,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -283,7 +299,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ST42MK57AZ;
+				DEVELOPMENT_TEAM = WCDMTFU55Z;
 				INFOPLIST_FILE = ALNotificationBar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,7 +317,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ST42MK57AZ;
+				DEVELOPMENT_TEAM = WCDMTFU55Z;
 				INFOPLIST_FILE = ALNotificationBar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
