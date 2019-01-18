@@ -172,6 +172,10 @@ open class ALNotificationBar {
         configurator(self._bgView)
     }
     
+    final public func styleBackgroundView(styletor: ((UIView) -> ())) {
+        styletor(self._bgView)
+    }
+    
     final public func add(subview: UIView) {
         self._contentView.addSubview(subview)
     }

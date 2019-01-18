@@ -78,7 +78,7 @@ class ViewController: UIViewController {
 
     let bonusBar = BonusNotificationBar(title: "Вы получили бонус в размере", desc: "700 сум", image: #imageLiteral(resourceName: "coin"))
     
-    let inAppBar = ALInAppNotificationBar(title: "New notification🤖", bodyMessage: "😹👍🐳 You have new notification from Notification bar app", icon: #imageLiteral(resourceName: "5@20"))
+    let inAppBar = ALInAppNotificationBar(title: "New notification🤖", bodyMessage: "😹👍🐳 You have new notification from Notification bar app")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,4 +100,3 @@ class ViewController: UIViewController {
         self.inAppBar.hideBar()
     }
 }
-

@@ -9,8 +9,9 @@
 import UIKit
 
 final public class ALInAppNotificationBar: ALNotificationBar {
-    private let _appInfoContent: UIView = UIView()
-    private let _appInfoBottom: UIView = UIView() //for hidding info content bottom corner
+    private let _shadowView: UIView = UIView()
+    private let _contentView: UIVisualEffectView = UIVisualEffectView()
+    private let _appInfoContent: UIVisualEffectView = UIVisualEffectView()
     private let _iconImageView: UIImageView = UIImageView()
     private let _appNameLabel: UILabel = UILabel()
     private let _titleLabel: UILabel = UILabel()
@@ -29,26 +30,29 @@ final public class ALInAppNotificationBar: ALNotificationBar {
     
     public override func configure() {
         self.setContent(height: 90)
-        let cornerRadius: CGFloat = 12
+        let cornerRadius: CGFloat = 10
         self.configureBackgroundView { (v) in
-            v.backgroundColor = UIColor.lightGray
-            v.clipsToBounds = true
-            v.layer.cornerRadius = cornerRadius
+            v.backgroundColor = UIColor.clear
         }
         
+        self._shadowView.layer.cornerRadius = cornerRadius
+        self._shadowView.backgroundColor = UIColor.white
+        self._shadowView.layer.shadowColor = UIColor.black.cgColor
+        self._shadowView.layer.shadowOpacity = 0.4
+        self._shadowView.layer.shadowOffset = CGSize.zero
+        self._shadowView.layer.shadowRadius = 7
+        
+        self._iconImageView.layer.cornerRadius = 5
+        self._iconImageView.clipsToBounds = true
         self._iconImageView.contentMode = .scaleAspectFit
-        self._appInfoContent.addSubview(self._iconImageView)
+        self._appInfoContent.contentView.addSubview(self._iconImageView)
         
         self._appNameLabel.text = self.appName
         self._appNameLabel.font = UIFont.systemFont(ofSize: 14)
         self._appNameLabel.textColor = UIColor.black
-        self._appInfoContent.addSubview(self._appNameLabel)
+        self._appInfoContent.contentView.addSubview(self._appNameLabel)
         
-        self._appInfoContent.backgroundColor = UIColor.gray
-        self._appInfoContent.clipsToBounds = true
-        self._appInfoContent.layer.cornerRadius = cornerRadius
-        
-        self._appInfoBottom.backgroundColor = self._appInfoContent.backgroundColor
+        self._appInfoContent.effect = UIBlurEffect(style: .light)
         
         self._titleLabel.textColor = UIColor.black
         self._titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
@@ -62,12 +66,16 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         self._bodyMessageLabel.numberOfLines = 0
         self._bodyMessageLabel.text = self._bodyMessage
         
-        self.add(subviews: self._appInfoContent,
-                 self._appInfoBottom,
-                 self._iconImageView,
-                 self._appNameLabel,
-                 self._titleLabel,
-                 self._bodyMessageLabel)
+        self._contentView.clipsToBounds = true
+        self._contentView.layer.cornerRadius = cornerRadius
+        self._contentView.contentView.addSubview(self._appInfoContent)
+        self._contentView.contentView.addSubview(self._titleLabel)
+        self._contentView.contentView.addSubview(self._bodyMessageLabel)
+        
+        self.add(subviews: self._shadowView,
+                 self._contentView)
+        
+        self.change(style: .light)
     }
     
     public override func layout(size: CGSize) {
@@ -76,12 +84,6 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         var w: CGFloat = size.width - 2 * x
         var h: CGFloat = 25
         self._appInfoContent.frame = CGRect(x: x, y: y, width: w, height: h)
-        
-        h = self._appInfoContent.layer.cornerRadius
-        y = self._appInfoContent.frame.maxY - h
-        x = 0
-        w = size.width - 2 * x
-        self._appInfoBottom.frame = CGRect(x: x, y: y, width: w, height: h)
         
         let m: CGFloat = 5
         x = m
@@ -107,5 +109,47 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         w = size.width - 2 * x
         h = size.height - y - x
         self._bodyMessageLabel.frame = CGRect(x: x, y: y, width: w, height: h)
+        
+        x = 0
+        y = 0
+        w = size.width
+        h = size.height
+        self._contentView.frame = CGRect(x: x, y: y, width: w, height: h)
+        
+        self._shadowView.frame = self._contentView.bounds
+    }
+    
+    final public func change(style: Style) {
+        var blurEffect: UIBlurEffect?
+        var appNameColor: UIColor?
+        var titleColor: UIColor?
+        var bodyColor: UIColor?
+        switch style {
+        case .dark:
+            blurEffect = UIBlurEffect(style: .dark)
+            appNameColor = UIColor.white
+            titleColor = UIColor.white
+            bodyColor = UIColor.white
+        case .light:
+            blurEffect = UIBlurEffect(style: .light)
+            appNameColor = UIColor.black
+            titleColor = UIColor.black
+            bodyColor = UIColor.black
+//        case .extraLight:
+//            blurEffect = UIBlurEffect(style: .extraLight)
+//            appNameColor = UIColor.black
+//            titleColor = UIColor.black
+//            bodyColor = UIColor.black
+        }
+        self._contentView.effect = blurEffect
+        self._appNameLabel.textColor = appNameColor
+        self._titleLabel.textColor = titleColor
+        self._bodyMessageLabel.textColor = bodyColor
+    }
+}
+
+extension ALInAppNotificationBar {
+    public enum Style {
+        case light, dark
     }
 }
