@@ -68,7 +68,7 @@ open class ALNotificationBar {
     private func height(of window: UIWindow) -> CGFloat {
         var h: CGFloat = 0
         switch self.heightMode {
-        case .avto:
+        case .auto:
             self.resizeHeightToFitSubviews(of: window)
             h = window.frame.height
         case .fixed:
@@ -89,7 +89,7 @@ open class ALNotificationBar {
             y = (maxH - height - self.padding.top - self.padding.bottom) / 2
         case .bottom:
             let maxH = self.screenFrame.height
-            y = maxH - height - self.padding.bottom - self.bottomArea
+            y = maxH - height - self.padding.bottom - self.bottomArea - 10
         }
         
         return y
@@ -103,19 +103,18 @@ open class ALNotificationBar {
     
     final public var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15) {
         didSet {
-            self.updateLayout()
         }
     }
     
     final public var heightMode: HeightMode = .fixed {
         didSet {
-            self.updateLayout()
+            
         }
     }
     
     final public var position: Position = .top {
         didSet {
-            self.updateLayout()
+            
         }
     }
     
@@ -218,7 +217,6 @@ open class ALNotificationBar {
         self._window = win
         
         self.configure()
-        self.updateLayout(window: self._window!)
     }
     
     private func configContentView(window: UIWindow) {
@@ -269,6 +267,7 @@ open class ALNotificationBar {
 //            self.hide()
             return
         }
+        self.updateLayout()
         let frame = self.window.frame
         let x: CGFloat = frame.minX
         let y: CGFloat = frame.minY
@@ -394,7 +393,7 @@ extension ALNotificationBar {
     
     //TODO: MUT FIX auto height mode
     public enum HeightMode {
-        case fixed, manual, avto
+        case fixed, manual, auto
     }
 }
 

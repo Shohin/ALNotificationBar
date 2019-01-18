@@ -28,6 +28,14 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         self._iconImageView.image = icon ?? self.appIcon
     }
     
+    public var style: Style = .light {
+        didSet {
+//            if oldValue  != self.style {
+//                self.change(style: self.style)
+//            }
+        }
+    }
+    
     public override func configure() {
         self.setContent(height: 90)
         let cornerRadius: CGFloat = 10
@@ -75,7 +83,7 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         self.add(subviews: self._shadowView,
                  self._contentView)
         
-        self.change(style: .light)
+        self.change(style: self.style)
     }
     
     public override func layout(size: CGSize) {
@@ -119,7 +127,7 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         self._shadowView.frame = self._contentView.bounds
     }
     
-    final public func change(style: Style) {
+    private func change(style: Style) {
         var blurEffect: UIBlurEffect?
         var appNameColor: UIColor?
         var titleColor: UIColor?
@@ -145,6 +153,21 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         self._appNameLabel.textColor = appNameColor
         self._titleLabel.textColor = titleColor
         self._bodyMessageLabel.textColor = bodyColor
+    }
+    
+    public static func showBar(title: String,
+                                     bodyMessage: String,
+                                     icon: UIImage? = nil,
+                                     style: Style = .light,
+                                     position: Position = .top,
+                                     moveDirecton: MoveDirection = .up,
+                                     animationType: AnimationType = .topBottom) {
+        let bar = ALInAppNotificationBar(title: title, bodyMessage: bodyMessage, icon: icon)
+        bar.style = style
+        bar.position = position
+        bar.moveDirection = moveDirecton
+        bar.animationType = animationType
+        bar.showBar()
     }
 }
 
