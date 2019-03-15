@@ -20,6 +20,10 @@ open class ALNotificationBar {
     
     private var tapActionClosure: (() -> ())?
     
+    public init() {
+        
+    }
+    
     private var window: UIWindow! {
         get {
             if self._window == nil {
