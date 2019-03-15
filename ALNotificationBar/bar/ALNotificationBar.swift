@@ -49,7 +49,7 @@ open class ALNotificationBar {
         return self.application.keyWindow!
     }
     
-    private var topArea: CGFloat {
+    private var _topArea: CGFloat {
         if #available(iOS 11.0, *) {
             return self.keyWindow.safeAreaInsets.top
         } else {
@@ -57,7 +57,7 @@ open class ALNotificationBar {
         }
     }
     
-    private var bottomArea: CGFloat {
+    private var _bottomArea: CGFloat {
         if #available(iOS 11.0, *) {
             return self.keyWindow.safeAreaInsets.bottom
         } else {
@@ -87,13 +87,13 @@ open class ALNotificationBar {
         var y: CGFloat = 0
         switch self.position {
         case .top:
-            y = ((self.safeAreaType == .ignoreAll || self.safeAreaType == .ignoreTop) ? 0 : self.topArea) + self.padding.top
+            y = ((self.safeAreaType == .ignoreAll || self.safeAreaType == .ignoreTop) ? 0 : self._topArea) + self.padding.top
         case .center:
             let maxH = self.screenFrame.height
             y = (maxH - height - self.padding.top - self.padding.bottom) / 2
         case .bottom:
             let maxH = self.screenFrame.height
-            y = maxH - height - self.padding.bottom - ((self.safeAreaType == .ignoreAll || self.safeAreaType == .ignoreBottom) ? 0 : self.bottomArea) - 10
+            y = maxH - height - self.padding.bottom - ((self.safeAreaType == .ignoreAll || self.safeAreaType == .ignoreBottom) ? 0 : self._bottomArea) - 10
         }
         
         return y
@@ -103,6 +103,14 @@ open class ALNotificationBar {
     final public var isShowed: Bool {
         return self._window != nil
             && !(self._window?.isHidden ?? true)
+    }
+    
+    final public var topArea: CGFloat {
+        return self._topArea
+    }
+    
+    final public var bottomArea: CGFloat {
+        return self._bottomArea
     }
     
     final public var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15) {
