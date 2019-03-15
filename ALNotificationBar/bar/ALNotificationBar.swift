@@ -154,6 +154,18 @@ open class ALNotificationBar {
         }
     }
     
+    final public var windowLevel: UIWindow.Level = UIWindow.Level.statusBar + 1 {
+        didSet {
+            
+        }
+    }
+    
+    final public var hidesOnTap: Bool = true {
+        didSet {
+            
+        }
+    }
+    
     final public var appName: String? {
         return ALNotificationBar.infoDic?["CFBundleName"] as? String
     }
@@ -224,7 +236,6 @@ open class ALNotificationBar {
     //MARK: private methods section
     private func initWindow() {
         let win = UIWindow(frame: .zero)
-        win.windowLevel = UIWindow.Level.statusBar + 1
         win.backgroundColor = UIColor.clear
         
         self._contentView.frame = win.bounds
@@ -277,6 +288,8 @@ open class ALNotificationBar {
             return
         }
         
+        self._window?.isUserInteractionEnabled = self.hidesOnTap
+        self.window.windowLevel = self.windowLevel
         self.window.isHidden = false
     }
     
