@@ -87,13 +87,13 @@ open class ALNotificationBar {
         var y: CGFloat = 0
         switch self.position {
         case .top:
-            y = self.topArea + self.padding.top
+            y = ((self.safeAreaType == .ignoreAll || self.safeAreaType == .ignoreTop) ? 0 : self.topArea) + self.padding.top
         case .center:
             let maxH = self.screenFrame.height
             y = (maxH - height - self.padding.top - self.padding.bottom) / 2
         case .bottom:
             let maxH = self.screenFrame.height
-            y = maxH - height - self.padding.bottom - self.bottomArea - 10
+            y = maxH - height - self.padding.bottom - ((self.safeAreaType == .ignoreAll || self.safeAreaType == .ignoreBottom) ? 0 : self.bottomArea) - 10
         }
         
         return y
@@ -107,6 +107,12 @@ open class ALNotificationBar {
     
     final public var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15) {
         didSet {
+        }
+    }
+    
+    final public var safeAreaType: SafeAreaType = .default {
+        didSet {
+            
         }
     }
     
@@ -383,6 +389,10 @@ open class ALNotificationBar {
 }
 
 extension ALNotificationBar {
+    public enum SafeAreaType {
+        case `default`, ignoreTop, ignoreBottom, ignoreAll
+    }
+    
     public enum MoveDirection {
         case up, left, down, right
     }
