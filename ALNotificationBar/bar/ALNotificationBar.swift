@@ -215,13 +215,13 @@ open class ALNotificationBar {
         }
     }
     
-    final public func showBar() {
+    final public func showBar(isAnimated: Bool) {
         
-        self.showAnimated()
+        self.show(isAnimated: isAnimated)
     }
     
-    final public func hideBar() {
-        self.hideAnimated()
+    final public func hideBar(isAnimated: Bool) {
+        self.hide(isAnimated: isAnimated)
     }
     
     final public func setContent(height: CGFloat) {
@@ -250,7 +250,7 @@ open class ALNotificationBar {
     
     private func configContentView(window: UIWindow) {
         self._contentView.setRemove {[unowned self] in
-            self.hideAnimated()
+            self.hide(isAnimated: true)
         }
         self._contentView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
@@ -293,38 +293,44 @@ open class ALNotificationBar {
         self.window.isHidden = false
     }
     
-    private func showAnimated() {
+    private func show(isAnimated: Bool) {
         if self.isShowed {
 //            self.hide()
             return
         }
         self.updateLayout()
-        let frame = self.window.frame
-        let x: CGFloat = frame.minX
-        let y: CGFloat = frame.minY
-        let w: CGFloat = frame.width
-        let h: CGFloat = frame.height
-        var moveX: CGFloat = x
-        var moveY: CGFloat = y
-        switch self.animationType {
-        case .topBottom:
-            moveY = -(self.screenFrame.height + h)
-        case .leftRight:
-            moveX = -(self.screenFrame.width + w)
-        case .bottomTop:
-            moveY = self.screenFrame.height + h
-        case .rightLeft:
-            moveX = self.screenFrame.width + w
-        case .none:
-            break
-        }
-        self.window.frame = CGRect(x: moveX, y: moveY, width: w, height: h)
-        self.show()
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
-            self.window.frame = frame
-        }, completion: { (yes) in
+        if isAnimated {
+            let frame = self.window.frame
+            let x: CGFloat = frame.minX
+            let y: CGFloat = frame.minY
+            let w: CGFloat = frame.width
+            let h: CGFloat = frame.height
+            var moveX: CGFloat = x
+            var moveY: CGFloat = y
+            switch self.animationType {
+            case .topBottom:
+                moveY = -(self.screenFrame.height + h)
+            case .leftRight:
+                moveX = -(self.screenFrame.width + w)
+            case .bottomTop:
+                moveY = self.screenFrame.height + h
+            case .rightLeft:
+                moveX = self.screenFrame.width + w
+            case .none:
+                break
+            }
+            self.window.frame = CGRect(x: moveX, y: moveY, width: w, height: h)
+            self.show()
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
+                self.window.frame = frame
+            }, completion: { (yes) in
+                self.startTimer()
+            })
+        } else {
+            self.show()
             self.startTimer()
-        })
+        }
+        
     }
     
     private func hide() {
@@ -332,30 +338,36 @@ open class ALNotificationBar {
         self.window = nil
     }
     
-    private func hideAnimated() {
-        let frame = self.window.frame
-        let x: CGFloat = frame.minX
-        let y: CGFloat = frame.minY
-        let w: CGFloat = frame.width
-        let h: CGFloat = frame.height
-        var moveX: CGFloat = x
-        var moveY: CGFloat = y
-        switch self.moveDirection {
-        case .up:
-            moveY = -self.screenFrame.height
-        case .left:
-            moveX = -self.screenFrame.width
-        case .down:
-            moveY = self.screenFrame.height
-        case .right:
-            moveX = self.screenFrame.width
-        }
-        UIView.animate(withDuration: 0.5, animations: {
-            self.window.frame = CGRect(x: moveX, y: moveY, width: w, height: h)
-        }, completion: { (yes) in
+    private func hide(isAnimated: Bool) {
+        if isAnimated {
+            let frame = self.window.frame
+            let x: CGFloat = frame.minX
+            let y: CGFloat = frame.minY
+            let w: CGFloat = frame.width
+            let h: CGFloat = frame.height
+            var moveX: CGFloat = x
+            var moveY: CGFloat = y
+            switch self.moveDirection {
+            case .up:
+                moveY = -self.screenFrame.height
+            case .left:
+                moveX = -self.screenFrame.width
+            case .down:
+                moveY = self.screenFrame.height
+            case .right:
+                moveX = self.screenFrame.width
+            }
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.window.frame = CGRect(x: moveX, y: moveY, width: w, height: h)
+            }, completion: { (yes) in
+                self.hide()
+                self.stopTimer()
+            })
+        } else {
             self.hide()
             self.stopTimer()
-        })
+        }
     }
     
     private func startTimer() {
@@ -399,13 +411,13 @@ open class ALNotificationBar {
     //MARK: actions
     @objc
     private func hideAction() {
-        self.hideAnimated()
+        self.hide(isAnimated: true)
     }
     
     @objc
     private func tapAction() {
         self.tapActionClosure?()
-        self.hideAnimated()
+        self.hide(isAnimated: true)
     }
 }
 

@@ -167,7 +167,7 @@ final public class ALInAppNotificationBar: ALNotificationBar {
         bar.position = position
         bar.moveDirection = moveDirecton
         bar.animationType = animationType
-        bar.showBar()
+        bar.showBar(isAnimated: true)
     }
 }
 

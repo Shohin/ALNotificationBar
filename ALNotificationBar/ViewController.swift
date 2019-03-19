@@ -196,7 +196,7 @@ class ViewController: UIViewController {
         case 0:
             self.inAppBar.style = self.inAppBarStyle
             self.prepare(bar: self.inAppBar)
-            self.inAppBar.showBar()
+            self.inAppBar.showBar(isAnimated: true)
         default:
             self.bonusBar.heightMode = self.heightMode
             if self.heightMode == .manual {
@@ -205,17 +205,17 @@ class ViewController: UIViewController {
                 self.bonusBar.setContent(height: CGFloat(h))
             }
             self.prepare(bar: self.bonusBar)
-            self.bonusBar.showBar()
+            self.bonusBar.showBar(isAnimated: true)
         }
     }
     
     private func hide() {
         switch self.barType {
         case 0:
-            self.inAppBar.hideBar()
+            self.inAppBar.hideBar(isAnimated: true)
 //            ALInAppNotificationBar.showBar(title: <#T##String#>, bodyMessage: <#T##String#>, icon: <#T##UIImage?#>, style: <#T##ALInAppNotificationBar.Style#>, position: <#T##ALNotificationBar.Position#>, moveDirecton: <#T##ALNotificationBar.MoveDirection#>, animationType: <#T##ALNotificationBar.AnimationType#>)
         default:
-            self.bonusBar.hideBar()
+            self.bonusBar.hideBar(isAnimated: true)
         }
     }
     
