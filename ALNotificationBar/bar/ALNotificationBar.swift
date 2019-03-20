@@ -10,6 +10,7 @@ import UIKit
 
 open class ALNotificationBar {
     private static let infoDic = Bundle.main.infoDictionary
+    private static let _windowTag: Int = 786172
     
     private var manualHeight: CGFloat = 0
     private let _contentView = ContentView()
@@ -224,6 +225,16 @@ open class ALNotificationBar {
         self.hide(isAnimated: isAnimated)
     }
     
+    public static func hideAll() {
+        let barWindows = UIApplication.shared.windows.filter { (w) -> Bool in
+            return w.tag == ALNotificationBar._windowTag
+        }
+        
+        for bW in barWindows {
+            bW.isHidden = true
+        }
+    }
+    
     final public func setContent(height: CGFloat) {
         self.manualHeight = height
         self.heightMode = .manual
@@ -237,6 +248,7 @@ open class ALNotificationBar {
     private func initWindow() {
         let win = UIWindow(frame: .zero)
         win.backgroundColor = UIColor.clear
+        win.tag = ALNotificationBar._windowTag
         
         self._contentView.frame = win.bounds
         win.addSubview(self._contentView)
