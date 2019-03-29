@@ -80,8 +80,7 @@ Pod::Spec.new do |spec|
   #  Specify the location from where the source should be retrieved.
   #  Supports git, hg, bzr, svn and HTTP.
   #
-
-  spec.source       = { :git => "https://github.com/Shohin/ALNotificationBar.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://shohin@bitbucket.org/shohin/alnotificationbar.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
