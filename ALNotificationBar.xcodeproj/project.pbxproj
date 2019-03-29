@@ -19,6 +19,7 @@
 		D3C0DFC021EF4DFC00BDC20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3C0DFBE21EF4DFC00BDC20C /* Main.storyboard */; };
 		D3C0DFC521EF4DFD00BDC20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3C0DFC321EF4DFD00BDC20C /* LaunchScreen.storyboard */; };
 		D3C0DFCE21EF4E1E00BDC20C /* ALNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0DFCD21EF4E1E00BDC20C /* ALNotificationBar.swift */; };
+		D3CE66A2224E3F3900F9D389 /* ALNotificationBar.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D3CE66A1224E3F3800F9D389 /* ALNotificationBar.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		D3C0DFC421EF4DFD00BDC20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3C0DFC621EF4DFD00BDC20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3C0DFCD21EF4E1E00BDC20C /* ALNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALNotificationBar.swift; sourceTree = "<group>"; };
+		D3CE66A1224E3F3800F9D389 /* ALNotificationBar.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ALNotificationBar.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		D3C0DFB921EF4DFC00BDC20C /* ALNotificationBar */ = {
 			isa = PBXGroup;
 			children = (
+				D3CE66A1224E3F3800F9D389 /* ALNotificationBar.podspec */,
 				D3C0DFCC21EF4E0600BDC20C /* bar */,
 				D3C0DFBA21EF4DFC00BDC20C /* AppDelegate.swift */,
 				D3C0DFBC21EF4DFC00BDC20C /* ViewController.swift */,
@@ -231,6 +234,7 @@
 			files = (
 				D3C0DFC521EF4DFD00BDC20C /* LaunchScreen.storyboard in Resources */,
 				D398918C21F1DC1000EB3932 /* Assets.xcassets in Resources */,
+				D3CE66A2224E3F3900F9D389 /* ALNotificationBar.podspec in Resources */,
 				D3C0DFC021EF4DFC00BDC20C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

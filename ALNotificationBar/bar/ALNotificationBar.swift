@@ -167,6 +167,12 @@ open class ALNotificationBar {
         }
     }
     
+    final public var isUserInteractionEnabled: Bool = true {
+        didSet {
+            
+        }
+    }
+    
     final public var appName: String? {
         return ALNotificationBar.infoDic?["CFBundleName"] as? String
     }
@@ -300,7 +306,7 @@ open class ALNotificationBar {
             return
         }
         
-        self._window?.isUserInteractionEnabled = self.hidesOnTap
+        self.window.isUserInteractionEnabled = self.isUserInteractionEnabled
         self.window.windowLevel = self.windowLevel
         self.window.isHidden = false
     }
@@ -420,6 +426,13 @@ open class ALNotificationBar {
         view.frame.size = CGSize(width: view.frame.width, height: h)
     }
     
+    private func tap() {
+        self.tapActionClosure?()
+        if self.hidesOnTap {
+            self.hide(isAnimated: true)
+        }
+    }
+    
     //MARK: actions
     @objc
     private func hideAction() {
@@ -428,8 +441,7 @@ open class ALNotificationBar {
     
     @objc
     private func tapAction() {
-        self.tapActionClosure?()
-        self.hide(isAnimated: true)
+        self.tap()
     }
 }
 
@@ -457,7 +469,7 @@ extension ALNotificationBar {
 }
 
 extension ALNotificationBar {
-    final private class ContentView: UIView {
+    final class ContentView: UIView {
         private var realOrigin: CGPoint!
         private var moveDirection: MoveDirection = .right
         private var removeClosure: (() -> ())?
