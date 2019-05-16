@@ -54,7 +54,7 @@ open class ALNotificationBar {
         if #available(iOS 11.0, *) {
             return self.keyWindow.safeAreaInsets.top
         } else {
-            return 0//keyWindow.layoutMargins.top
+            return UIApplication.shared.statusBarFrame.height
         }
     }
     

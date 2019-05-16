@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ALNotificationBar"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.swift_version    = '4.2'
   spec.summary      = "ALNotificationBar is notification, message, alert, ... iOS Lib"
 
