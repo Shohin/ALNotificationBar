@@ -157,7 +157,7 @@ open class ALNotificationBar {
     
     final public var windowLevel: UIWindow.Level = UIWindow.Level.statusBar + 1 {
         didSet {
-            
+            self.window.windowLevel = self.windowLevel
         }
     }
     
@@ -169,7 +169,7 @@ open class ALNotificationBar {
     
     final public var isUserInteractionEnabled: Bool = true {
         didSet {
-            
+            self.window.isUserInteractionEnabled = self.isUserInteractionEnabled
         }
     }
     
